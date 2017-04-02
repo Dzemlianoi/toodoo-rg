@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: toodoo_development
+
+test:
+  <<: *default
+  database: toodoo_test
+
+production:
+  <<: *default
+  database: toodoo_production
+  username: toodoo
+  password: <%= ENV['TOODOO_DATABASE_PASSWORD'] %>
