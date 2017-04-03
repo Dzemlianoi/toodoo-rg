@@ -19,7 +19,20 @@ gem 'jquery-rails'
 gem 'active_model_serializers'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'rails-controller-testing', git: 'https://github.com/rails/rails-controller-testing'
+  gem 'ffaker'
+  gem 'rubocop'
+  gem 'simplecov'
+  gem 'awesome_print'
 end
 
 group :development do
