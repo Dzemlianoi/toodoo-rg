@@ -6,27 +6,18 @@ class TasksController < ApplicationController
   end
 
   def create
-    if @task
-      render json: @task
-    else
-      render json: { message: I18n.t('task.error_save') }, status: 200
-    end
+    render json: @task and return if @task
+    render json: { message: I18n.t('errors.task.save') }, status: 200
   end
 
   def update
-    if @task.update(task_params)
-      render json: @task
-    else
-      render json: { message: I18n.t('task.error_update') }, status: 200
-    end
+    render json: @task and return if @task.update(task_params)
+    render json: { message: I18n.t('errors.task.update') }, status: 200
   end
 
   def destroy
-    if @task.destroy
-      render json: @task
-    else
-      render json: { message: I18n.t('task_list.error_destroy') }, status: 200
-    end
+    render json: { nothing: true } and return if @task.destroy
+    render json: { message: I18n.t('errors.task.destroy') }, status: 200
   end
 
   private
