@@ -1,22 +1,28 @@
 class CommentsController < ApplicationController
-  load_and_authorize_resource :task
-  load_and_authorize_resource :comment, through: :task
+  load_and_authorize_resource
 
-  def create
-    @comment.save
+  def index
+    render json: @comments
   end
 
-  def destroy
-    @comment.destroy
+  def create
+    render json: @comment and return if @comment.save
+    render json: { message: I18n.t('errors.comment.save') }, status: 200
   end
 
   def update
-    @comment.update(comment_params.except(:task_id))
+    render json: @comment and return if @comment.update(comment_params)
+    render json: { message: I18n.t('errors.comment.update') }, status: 200
+  end
+
+  def destroy
+    render json: { nothing: true } and return if @comment.destroy
+    render json: { message: I18n.t('errors.comment.destroy') }, status: 200
   end
 
   private
 
   def comment_params
-    params.permit(:task_id, :text, :attachment)
+    params.permit(:comment_text)
   end
 end

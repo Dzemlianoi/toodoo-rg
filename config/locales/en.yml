@@ -8,3 +8,7 @@ en:
       save: 'Cant save the task'
       update: 'Task updating failed'
       destroy: 'Error while deleting the task'
+    comment:
+      save: 'Cant save the comment'
+      update: 'Comment updating failed'
+      destroy: 'Error while deleting the comment'
