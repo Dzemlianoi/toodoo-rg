@@ -1,29 +1,37 @@
-class  TasksController < ApplicationController
-  load_and_authorize_resource :task
-  load_and_authorize_resource :project, thorough: :current_user
+class TasksController < ApplicationController
+  load_and_authorize_resource
 
-  def create
-    @task.save
+  def index
+    render json: @tasks
   end
 
-  def show
+  def create
+    if @task
+      render json: @task
+    else
+      render json: { message: I18n.t('task.error_save') }, status: 200
+    end
   end
 
   def update
-    @task.update(task_params)
+    if @task.update(task_params)
+      render json: @task
+    else
+      render json: { message: I18n.t('task.error_update') }, status: 200
+    end
   end
 
   def destroy
-    @task.destroy
-  end
-
-  def statuses
-    @statuses = Task.statuses.keys
+    if @task.destroy
+      render json: @task
+    else
+      render json: { message: I18n.t('task_list.error_destroy') }, status: 200
+    end
   end
 
   private
 
   def task_params
-    params.fetch(:task).permit(:title, :project_id, :deadline, :done, :status, :order)
+    params.permit(:title, :project_id, :deadline, :completed, :priorite)
   end
 end
