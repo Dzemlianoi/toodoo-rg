@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    render json: @task and return if @task
+    render json: @task and return if @task.save
     render json: { message: I18n.t('errors.task.save') }, status: 200
   end
 
