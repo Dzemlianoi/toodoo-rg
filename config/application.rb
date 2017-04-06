@@ -7,5 +7,14 @@ module Toodoo
   class Application < Rails::Application
     config.api_only = true
     config.assets.initialize_on_precompile = false
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+                 :headers => :any,
+                 :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 :methods => [:get, :post, :options, :patch, :delete, :put]
+      end
+    end
   end
 end
