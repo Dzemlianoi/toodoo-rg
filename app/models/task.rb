@@ -15,13 +15,11 @@ class Task < ApplicationRecord
   private
 
   def set_priorite
-    self.priorite = project.tasks.empty? ? 1 : project.tasks.last.increment!(:priorite)
+    self.priorite = project.tasks.empty? ? 1 : (project.tasks.last.priorite + 1)
   end
 
   def move_priorites
-    self.project.tasks.where("priorite > #{priorite}").find_each do |task|
-      task.decrement!(:priorite)
-    end
+    project.tasks.where("priorite > #{priorite}").find_each { |task| task.decrement!(:priorite) }
   end
 
   def correct_deadline

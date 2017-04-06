@@ -14,9 +14,8 @@ RSpec.describe Task, type: :model do
   end
 
   context 'priorite setting' do
-    let(:project) { create :project }
+    let!(:project) { create :project }
     let!(:task_one) { create :task, project: project }
-    binding.pry
     let!(:task_two) { create :task, project: project }
     let!(:task_three) { create :task, project: project }
 
@@ -26,7 +25,9 @@ RSpec.describe Task, type: :model do
     end
 
     it 'should change all priorites which are lower than it' do
-      task.destroy
+      task_one.destroy
+      task_two.reload
+      task_three.reload
       expect(task_two.priorite).to be_equal(1)
       expect(task_three.priorite).to be_equal(2)
     end
