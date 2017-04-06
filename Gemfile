@@ -18,6 +18,7 @@ gem 'cancancan'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'cloudinary'
+gem 'rolify'
 
 group :development, :test do
   gem 'pry'
