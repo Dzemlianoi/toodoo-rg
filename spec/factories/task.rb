@@ -10,5 +10,9 @@ FactoryGirl.define do
     factory :with_valid_deadline do
       deadline { DateTime.now + 10.days }
     end
+
+    factory :task_with_project do
+      project { create :project_with_user }
+    end
   end
 end
