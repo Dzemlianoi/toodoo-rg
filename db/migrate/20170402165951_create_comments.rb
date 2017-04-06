@@ -5,6 +5,5 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_reference :comments, :task, index: true, foreign_key: true
-    add_reference :comments, :user, index: true, foreign_key: true
   end
 end
