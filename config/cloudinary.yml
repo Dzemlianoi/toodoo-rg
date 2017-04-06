@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: toodoo-rg
+  api_key: '877569247313318'
+  api_secret: re_ytGlvV3iYmcfozTE653bvzb4
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: toodoo-rg
+  api_key: '877569247313318'
+  api_secret: re_ytGlvV3iYmcfozTE653bvzb4
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: toodoo-rg
+  api_key: '877569247313318'
+  api_secret: re_ytGlvV3iYmcfozTE653bvzb4
+  enhance_image_tag: true
+  static_image_support: false
