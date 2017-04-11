@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe CommentsController, type: :controller do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
@@ -33,7 +35,7 @@ RSpec.describe CommentsController, type: :controller do
       end
 
       it 'changes comment count' do
-        expect{ request }.to change{ Comment.count }.by(1)
+        expect { request }.to change { Comment.count }.by(1)
       end
     end
 
@@ -51,7 +53,7 @@ RSpec.describe CommentsController, type: :controller do
       end
 
       it 'dont changes comment count' do
-        expect{ request }.not_to change{ Comment.count }
+        expect { request }.not_to change { Comment.count }
       end
     end
   end
@@ -71,8 +73,7 @@ RSpec.describe CommentsController, type: :controller do
     let(:request) { post :destroy, format: :json, params: { id: comment.id } }
 
     it 'changes comment count' do
-      expect{ request }.to change{ Comment.count }.by(-1)
+      expect { request }.to change { Comment.count }.by(-1)
     end
   end
 end
-

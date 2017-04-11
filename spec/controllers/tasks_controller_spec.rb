@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe TasksController, type: :controller do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
@@ -32,7 +34,7 @@ RSpec.describe TasksController, type: :controller do
       end
 
       it 'changes tasks count' do
-        expect{ request }.to change{ Task.count }.by(1)
+        expect { request }.to change { Task.count }.by(1)
       end
     end
 
@@ -50,7 +52,7 @@ RSpec.describe TasksController, type: :controller do
       end
 
       it 'dont changes task count' do
-        expect{ request }.not_to change{ Project.count }
+        expect { request }.not_to change { Project.count }
       end
     end
   end
@@ -70,8 +72,7 @@ RSpec.describe TasksController, type: :controller do
     let(:request) { post :destroy, format: :json, params: { id: task.id } }
 
     it 'changes task count' do
-      expect{ request }.to change{ Task.count }.by(-1)
+      expect { request }.to change { Task.count }.by(-1)
     end
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Task < ApplicationRecord
   belongs_to :project
   has_many :comments, dependent: :destroy
@@ -7,7 +9,7 @@ class Task < ApplicationRecord
 
   validates_presence_of :title, :priorite, :project
   validates_length_of :title, in: 2..40
-  validates_numericality_of :priorite , only_integer: true, greater_than: 0
+  validates_numericality_of :priorite, only_integer: true, greater_than: 0
   validate :correct_deadline
 
   default_scope { order('priorite ASC') }
@@ -24,6 +26,6 @@ class Task < ApplicationRecord
 
   def correct_deadline
     return unless deadline
-    errors.add(:deadline, I18n.t('errors.task.deadline')) if self.deadline.past?
+    errors.add(:deadline, I18n.t('errors.task.deadline')) if deadline.past?
   end
 end

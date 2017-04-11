@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :comment do
     comment_text { FFaker::LoremUA.words(9) }

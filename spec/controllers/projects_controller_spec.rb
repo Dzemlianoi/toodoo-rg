@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ProjectsController, type: :controller do
   let(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
@@ -30,7 +32,7 @@ RSpec.describe ProjectsController, type: :controller do
       end
 
       it 'changes project count' do
-        expect{request}.to change{ Project.count }.by(1)
+        expect { request }.to change { Project.count }.by(1)
       end
     end
 
@@ -48,7 +50,7 @@ RSpec.describe ProjectsController, type: :controller do
       end
 
       it 'dont changes project count' do
-        expect{request}.not_to change{ Project.count }
+        expect { request }.not_to change { Project.count }
       end
     end
   end
@@ -68,7 +70,7 @@ RSpec.describe ProjectsController, type: :controller do
     let(:request) { post :destroy, format: :json, params: { id: project.id } }
 
     it 'changes project count' do
-      expect{request}.to change{ Project.count }.by(-1)
+      expect { request }.to change { Project.count }.by(-1)
     end
   end
 end

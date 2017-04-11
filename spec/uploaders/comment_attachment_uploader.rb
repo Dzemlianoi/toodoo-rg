@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'carrierwave/test/matchers'
 
 describe CommentAttachmentUploader do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Task, type: :model do
   context 'fields' do
     subject { create :task, project: create(:project) }
