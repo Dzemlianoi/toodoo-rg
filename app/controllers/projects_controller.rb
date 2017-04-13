@@ -8,6 +8,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    # fix later
+    @project.user_id = 1
     render json: @project and return if @project.save
     render json: @project.errors, status: :unprocessable_entity
   end
