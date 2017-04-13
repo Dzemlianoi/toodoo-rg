@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render json: @tasks
+    render json: @tasks.where(project_id: task_params[:project_id]) if task_params.key? [:project_id]
+    render json: { message: I18n.t('errors.task.index'), status: :unprocessable_entity }
   end
 
   def create

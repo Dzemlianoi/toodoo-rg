@@ -5,6 +5,7 @@ en:
       update: 'Project updating failed'
       destroy: 'Error while deleting the project'
     task:
+      index: 'Something went wrong while project_id uploading'
       save: 'Cant save the task'
       update: 'Task updating failed'
       destroy: 'Error while deleting the task'
