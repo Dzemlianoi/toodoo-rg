@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    render json: { nothing: true } and return if @comment.destroy
+    render json: { deleted: true } and return if @comment.destroy
     render json: { message: I18n.t('errors.comment.destroy') }, status: 200
   end
 

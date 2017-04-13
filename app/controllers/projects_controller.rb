@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    render json: { nothing: true } and return if @project.destroy
+    render json: { deleted: true } and return if @project.destroy
     render json: { message: I18n.t('errors.project.destroy') }, status: 200
   end
 
