@@ -9,12 +9,12 @@ class ProjectsController < ApplicationController
 
   def create
     render json: @project and return if @project.save
-    render json: { message: I18n.t('errors.project.save') }, status: 200
+    render json: @project.errors, status: :unprocessable_entity
   end
 
   def update
     render json: @project and return if @project.update(project_params)
-    render json: { message: I18n.t('errors.project.update') }, status: 200
+    render json: @project.errors, status: :unprocessable_entity
   end
 
   def destroy

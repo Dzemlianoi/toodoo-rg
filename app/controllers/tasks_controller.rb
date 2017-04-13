@@ -9,17 +9,17 @@ class TasksController < ApplicationController
 
   def create
     render json: @task and return if @task.save
-    render json: { message: I18n.t('errors.task.save') }, status: 200
+    render json: @task.errors, status: :unprocessable_entity
   end
 
   def update
     render json: @task and return if @task.update(task_params)
-    render json: { message: I18n.t('errors.task.update') }, status: 200
+    render json: @task.errors, status: :unprocessable_entity
   end
 
   def destroy
     render json: { deleted: true } and return if @task.destroy
-    render json: { message: I18n.t('errors.task.destroy') }, status: 200
+    render json: { message: I18n.t('errors.task.destroy') }, status: :unprocessable_entity
   end
 
   private

@@ -9,17 +9,17 @@ class CommentsController < ApplicationController
 
   def create
     render json: @comment and return if @comment.save
-    render json: { message: I18n.t('errors.comment.save') }, status: 200
+    render json: @comment.errors, status: :unprocessable_entity
   end
 
   def update
     render json: @comment and return if @comment.update(comment_params)
-    render json: { message: I18n.t('errors.comment.update') }, status: 200
+    render json: @comment.errors, status: 200
   end
 
   def destroy
     render json: { deleted: true } and return if @comment.destroy
-    render json: { message: I18n.t('errors.comment.destroy') }, status: 200
+    render json: { message: I18n.t('errors.comment.destroy') }, status: :unprocessable_entity
   end
 
   private
