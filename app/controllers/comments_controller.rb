@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render json: @comments
+    render json: @comments.where(task_id: params[:task_id])
   end
 
   def create
