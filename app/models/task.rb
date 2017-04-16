@@ -21,7 +21,19 @@ class Task < ApplicationRecord
   end
 
   def move_priorites
-    project.tasks.where("priorite > #{priorite}").find_each { |task| task.decrement!(:priorite) }
+    project.tasks.where("priorite > #{ priorite }").find_each { |task| task.decrement!(:priorite) }
+  end
+
+  def priorite_up
+    sided_task = project.tasks.find_by("priorite = #{ priorite.to_i - 1 }").increment!(:priorite)
+    self_task = self.decrement!(:priorite)
+    { sided_task: sided_task, self_task: self_task }
+  end
+
+  def priorite_down
+    sided_task = project.tasks.find_by("priorite = #{ priorite.to_i + 1 }").decrement!(:priorite)
+    self_task = self.increment(:priorite)
+    { sided_task: sided_task, self_task: self_task }
   end
 
   def correct_deadline
