@@ -4,6 +4,8 @@ class Task < ApplicationRecord
   belongs_to :project
   has_many :comments, dependent: :destroy
 
+  scope :active, -> { where(completed: true) }
+
   before_validation :set_priority, on: :create
   before_destroy :move_prioritis
 
@@ -15,13 +17,13 @@ class Task < ApplicationRecord
   default_scope { order('priority ASC') }
 
   def priority_up
-    sided_task = project.tasks.find_by("priority = #{ priority.to_i - 1 }").increment!(:priority)
+    sided_task = project.tasks.active.where("priority < #{priority.to_i}").last.increment!(:priority)
     self_task = self.decrement!(:priority)
     { sided_task: sided_task, self_task: self_task }
   end
 
   def priority_down
-    sided_task = project.tasks.find_by("priority = #{ priority.to_i + 1 }").decrement!(:priority)
+    sided_task = project.tasks.active.where("priority > #{ priority.to_i + 1 }").first.decrement!(:priority)
     self_task = self.increment!(:priority)
     { sided_task: sided_task, self_task: self_task }
   end
