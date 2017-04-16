@@ -14,16 +14,6 @@ class Task < ApplicationRecord
 
   default_scope { order('priorite ASC') }
 
-  private
-
-  def set_priorite
-    self.priorite = project.tasks.empty? ? 1 : (project.tasks.last.priorite + 1)
-  end
-
-  def move_priorites
-    project.tasks.where("priorite > #{ priorite }").find_each { |task| task.decrement!(:priorite) }
-  end
-
   def priorite_up
     sided_task = project.tasks.find_by("priorite = #{ priorite.to_i - 1 }").increment!(:priorite)
     self_task = self.decrement!(:priorite)
@@ -34,6 +24,16 @@ class Task < ApplicationRecord
     sided_task = project.tasks.find_by("priorite = #{ priorite.to_i + 1 }").decrement!(:priorite)
     self_task = self.increment(:priorite)
     { sided_task: sided_task, self_task: self_task }
+  end
+
+  private
+
+  def set_priorite
+    self.priorite = project.tasks.empty? ? 1 : (project.tasks.last.priorite + 1)
+  end
+
+  def move_priorites
+    project.tasks.where("priorite > #{ priorite }").find_each { |task| task.decrement!(:priorite) }
   end
 
   def correct_deadline

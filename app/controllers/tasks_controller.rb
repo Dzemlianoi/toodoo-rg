@@ -23,6 +23,12 @@ class TasksController < ApplicationController
     render json: { message: I18n.t('errors.task.destroy') }, status: :unprocessable_entity
   end
 
+  %w(up down).each do |key|
+    define_method("order_#{key}") do
+      render json: @task.send("priorite_#{key}")
+    end
+  end
+
   private
 
   def task_params
