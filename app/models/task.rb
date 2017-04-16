@@ -22,7 +22,7 @@ class Task < ApplicationRecord
 
   def priorite_down
     sided_task = project.tasks.find_by("priorite = #{ priorite.to_i + 1 }").decrement!(:priorite)
-    self_task = self.increment(:priorite)
+    self_task = self.increment!(:priorite)
     { sided_task: sided_task, self_task: self_task }
   end
 
