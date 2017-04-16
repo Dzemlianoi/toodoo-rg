@@ -4,36 +4,36 @@ class Task < ApplicationRecord
   belongs_to :project
   has_many :comments, dependent: :destroy
 
-  before_validation :set_priorite, on: :create
-  before_destroy :move_priorites
+  before_validation :set_priority, on: :create
+  before_destroy :move_prioritis
 
-  validates_presence_of :title, :priorite, :project
+  validates_presence_of :title, :priority, :project
   validates_length_of :title, in: 2..40
-  validates_numericality_of :priorite, only_integer: true, greater_than: 0
+  validates_numericality_of :priority, only_integer: true, greater_than: 0
   validate :correct_deadline
 
-  default_scope { order('priorite ASC') }
+  default_scope { order('priority ASC') }
 
-  def priorite_up
-    sided_task = project.tasks.find_by("priorite = #{ priorite.to_i - 1 }").increment!(:priorite)
-    self_task = self.decrement!(:priorite)
+  def priority_up
+    sided_task = project.tasks.find_by("priority = #{ priority.to_i - 1 }").increment!(:priority)
+    self_task = self.decrement!(:priority)
     { sided_task: sided_task, self_task: self_task }
   end
 
-  def priorite_down
-    sided_task = project.tasks.find_by("priorite = #{ priorite.to_i + 1 }").decrement!(:priorite)
-    self_task = self.increment!(:priorite)
+  def priority_down
+    sided_task = project.tasks.find_by("priority = #{ priority.to_i + 1 }").decrement!(:priority)
+    self_task = self.increment!(:priority)
     { sided_task: sided_task, self_task: self_task }
   end
 
   private
 
-  def set_priorite
-    self.priorite = project.tasks.empty? ? 1 : (project.tasks.last.priorite + 1)
+  def set_priority
+    self.priority = project.tasks.empty? ? 1 : (project.tasks.last.priority + 1)
   end
 
-  def move_priorites
-    project.tasks.where("priorite > #{ priorite }").find_each { |task| task.decrement!(:priorite) }
+  def move_prioritis
+    project.tasks.where("priority > #{ priority }").find_each { |task| task.decrement!(:priority) }
   end
 
   def correct_deadline
