@@ -10,7 +10,7 @@ RSpec.describe Task, type: :model do
     it { is_expected.to validate_presence_of(:priority) }
     it { is_expected.to validate_presence_of(:project) }
     it { is_expected.to validate_length_of(:title).is_at_least 2 }
-    it { is_expected.to validate_length_of(:title).is_at_most 40 }
+    it { is_expected.to validate_length_of(:title).is_at_most 39 }
     it { is_expected.to validate_numericality_of(:priority).only_integer }
     it { is_expected.to validate_numericality_of(:priority).is_greater_than 0 }
   end
