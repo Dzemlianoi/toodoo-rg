@@ -36,7 +36,6 @@ class Task < ApplicationRecord
   end
 
   def set_priority
-    byebug
     self.priority = project.tasks.empty? ? 1 : (project.tasks.last.priority + 1)
   end
 
