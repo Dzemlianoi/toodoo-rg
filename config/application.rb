@@ -11,9 +11,9 @@ module Toodoo
       allow do
         origins '*'
         resource '*',
-                 :headers => :any,
-                 :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-                 :methods => [:get, :post, :options, :patch, :delete, :put]
+                 headers: :any,
+                 expose:  %w[access-token expiry token-type uid client],
+                 methods: %i[get post options patch delete put]
       end
     end
   end
