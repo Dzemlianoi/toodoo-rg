@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(version: 20170406091849) do
     t.string   "uid",                 default: "",      null: false
     t.string   "encrypted_password",  default: "",      null: false
     t.string   "email"
+    t.string   "nickname"
+    t.string   "image"
+    t.string   "name"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",       default: 0,       null: false
     t.datetime "current_sign_in_at"
