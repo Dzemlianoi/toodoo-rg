@@ -76,4 +76,15 @@ RSpec.describe CommentsController, type: :controller do
       expect { request }.to change { Comment.count }.by(-1)
     end
   end
+
+  before do
+    allow(controller).to receive(:current_user) { nil }
+  end
+
+  describe 'check unauthorized user' do
+    it { expect(get :index, format: :json).to have_http_status(403) }
+    it { expect(post :create, format: :json).to have_http_status(403) }
+    it { expect(patch :update, format: :json).to have_http_status(403) }
+    it { expect(delete :destroy, format: :json).to have_http_status(403) }
+  end
 end
