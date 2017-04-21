@@ -6,6 +6,9 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.0]
 
       t.string :encrypted_password, null: false, default: ''
       t.string :email
+      t.string :nickname
+      t.string :image
+      t.string :name
 
       t.datetime :remember_created_at
 
