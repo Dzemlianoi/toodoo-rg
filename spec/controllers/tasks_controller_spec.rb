@@ -41,9 +41,9 @@ RSpec.describe TasksController, type: :controller do
     context 'error' do
       let(:request) { post :create, format: :json, params: { project_id: project.id } }
 
-      it 'response with 200 code' do
+      it 'response with 422 code' do
         request
-        expect(response.status).to eq 200
+        expect(response.status).to eq 422
       end
 
       it 'task cannot be initialized' do

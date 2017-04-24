@@ -42,9 +42,9 @@ RSpec.describe CommentsController, type: :controller do
     context 'error' do
       let(:request) { post :create, format: :json, params: { task_id: task.id } }
 
-      it 'response with 200 code' do
+      it 'response with 422 code' do
         request
-        expect(response.status).to eq 200
+        expect(response.status).to eq 422
       end
 
       it 'task cannot be initialized' do
@@ -82,9 +82,9 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'check unauthorized user' do
-    it { expect(get :index, format: :json).to have_http_status(403) }
-    it { expect(post :create, format: :json).to have_http_status(403) }
-    it { expect(patch :update, format: :json).to have_http_status(403) }
-    it { expect(delete :destroy, format: :json).to have_http_status(403) }
+    it { expect(get :index, format: :json).to have_http_status(401) }
+    it { expect(post :create, format: :json).to have_http_status(401) }
+    it { expect(patch :update, format: :json).to have_http_status(401) }
+    it { expect(delete :destroy, format: :json).to have_http_status(401) }
   end
 end

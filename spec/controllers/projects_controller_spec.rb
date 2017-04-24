@@ -39,9 +39,9 @@ RSpec.describe ProjectsController, type: :controller do
     context 'error' do
       let(:request) { post :create, format: :json }
 
-      it 'response with 200 code' do
+      it 'response with 422 code' do
         request
-        expect(response.status).to eq 200
+        expect(response.status).to eq 422
       end
 
       it 'project cannot be initialized' do
